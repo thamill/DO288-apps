@@ -3,7 +3,6 @@ FROM quay.io/redhattraining/httpd-parent
 
 EXPOSE 8080
 
-
 LABEL io.k8s.description="a basic apache http server child image, uses ONBUILD" \
       io.k8s.display-name="Apache HTTP Server" \
       io.openshift.expose-services="8080:http" \
@@ -12,6 +11,6 @@ LABEL io.k8s.description="a basic apache http server child image, uses ONBUILD" 
 RUN sed -i "s/Listen 80/Listen 8080/g" /etc/httpd/conf/httpd.conf
 
 RUN chgrp -R 0 /var/log/httpd /var/run/httpd && \
-    chown -R g=u /var/log/httpd /var/run/httpd
+    chmod -R g=u /var/log/httpd /var/run/httpd
 
 USER 1001
